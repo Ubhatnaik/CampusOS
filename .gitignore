@@ -1,0 +1,19 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+*
+
+# Python environment
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Secrets and environment variables
+.env
+.streamlit/secrets.toml
+
+# Local database and uploaded PDFs
+campusos.db
+uploads/
+
+# Local development files
+.vscode/
