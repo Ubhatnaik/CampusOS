@@ -112,11 +112,12 @@ if page == "Dashboard":
         col6.metric("Quiz Attempts", stats["quizzes"])
 
     except sqlite3.Error:
-        st.error(
-            "Could not read the CampusOS database. "
-            "Check that campusos.db is in the project folder."
-        )
-
+    st.info(
+        "Welcome to CampusOS! "
+        "Your online dashboard is ready. "
+        "Database features will be available "
+        "after cloud database setup."
+    )
     st.divider()
     st.subheader("Explore CampusOS")
 
