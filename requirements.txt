@@ -3,3 +3,4 @@ requests
 PyMuPDF
 Werkzeug
 psycopg[binary]
+sqlalchemy
