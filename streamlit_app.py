@@ -1186,8 +1186,22 @@ with st.sidebar:
     st.caption("CampusOS • Student Learning Platform")
 
 
+
+# Main-page navigation backup
+selected_page = st.selectbox(
+    "🧭 Navigate to a page",
+    pages,
+    index=pages.index(st.session_state["page"]),
+    key="main_page_navigation",
+)
+
+if selected_page != st.session_state["page"]:
+    st.session_state["page"] = selected_page
+    st.rerun()
+
 # Dashboard and feature pages
-page = st.session_state.page
+page = st.session_state["page"]
+
 
 
 
