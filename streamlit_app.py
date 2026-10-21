@@ -514,6 +514,17 @@ def get_db():
     connection.execute("PRAGMA foreign_keys = ON")
     return connection
 
+def check_database_status():
+    connection = get_db()
+    try:
+        user_count = connection.execute(
+            "SELECT COUNT(*) FROM users"
+        ).fetchone()[0]
+
+        return user_count
+    finally:
+        connection.close()
+
 
 initialize_database()
 
@@ -1105,6 +1116,8 @@ if "page" not in st.session_state:
 
 if "user" not in st.session_state:
     st.session_state.user = None
+    
+st.info(f"Diagnostic: users in current database = {check_database_status()}")
 
 
 # Require login before opening the platform
