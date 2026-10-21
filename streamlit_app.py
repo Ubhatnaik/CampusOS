@@ -1116,8 +1116,6 @@ if "page" not in st.session_state:
 
 if "user" not in st.session_state:
     st.session_state.user = None
-    
-st.info(f"Diagnostic: users in current database = {check_database_status()}")
 
 
 # Require login before opening the platform
