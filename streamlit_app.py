@@ -22,12 +22,11 @@ st.set_page_config(
 )
 
 
-
 st.markdown(
     """
     <style>
     /* ==========================================
-       CAMPUSOS — COMPLETE VISUAL THEME
+       CAMPUSOS — LIGHT THEME WITH BLUE ACCENTS
        ========================================== */
 
     :root {
@@ -51,11 +50,11 @@ st.markdown(
     }
 
     [data-testid="stMain"] .block-container {
-        max-width: 1350px;
-        padding: 2rem 2.5rem 3rem;
+        max-width: 1200px;
+        padding: 1.5rem 2rem 2rem;
     }
 
-    /* TOP HEADER — remove black strip */
+    /* HEADER */
     [data-testid="stHeader"] {
         background: var(--page-bg) !important;
         color: var(--navy) !important;
@@ -70,29 +69,38 @@ st.markdown(
     }
 
     [data-testid="stHeader"] svg {
-        fill: var(--navy) !important;
         color: var(--navy) !important;
+        fill: var(--navy) !important;
     }
 
     [data-testid="stDecoration"] {
         background: var(--page-bg) !important;
     }
 
-    /* MAIN HEADINGS */
+    /* HEADINGS AND TEXT */
     [data-testid="stMain"] h1,
     [data-testid="stMain"] h2,
     [data-testid="stMain"] h3,
     [data-testid="stMain"] h4 {
         color: var(--navy) !important;
-        font-weight: 750 !important;
+        font-weight: 700 !important;
+    }
+
+    [data-testid="stMain"] h1 {
+        font-size: 1.8rem !important;
+    }
+
+    [data-testid="stMain"] h2 {
+        font-size: 1.35rem !important;
+    }
+
+    [data-testid="stMain"] h3 {
+        font-size: 1.05rem !important;
     }
 
     [data-testid="stMain"] p,
     [data-testid="stMain"] li,
-    [data-testid="stMain"] label {
-        color: var(--text-main);
-    }
-
+    [data-testid="stMain"] label,
     [data-testid="stMain"] [data-testid="stMarkdownContainer"] {
         color: var(--text-main);
     }
@@ -102,7 +110,7 @@ st.markdown(
         color: var(--text-muted) !important;
     }
 
-    /* SIDEBAR */
+    /* SIDEBAR — KEEP THE EXISTING DARK NAVY THEME */
     [data-testid="stSidebar"],
     [data-testid="stSidebar"] > div {
         background: var(--navy-dark) !important;
@@ -113,130 +121,115 @@ st.markdown(
     [data-testid="stSidebar"] h3,
     [data-testid="stSidebar"] p,
     [data-testid="stSidebar"] label,
-    [data-testid="stSidebar"] strong {
+    [data-testid="stSidebar"] strong,
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"],
+    [data-testid="stSidebar"] [data-testid="stCaptionContainer"] {
         color: #F8FAFC !important;
-    }
-
-    [data-testid="stSidebar"] [data-testid="stCaptionContainer"],
-    [data-testid="stSidebar"] [data-testid="stCaptionContainer"] p {
-        color: #CBD5E1 !important;
     }
 
     [data-testid="stSidebar"] hr {
         border-color: #34415B !important;
     }
 
-    /* SIDEBAR NAVIGATION BUTTONS */
+    /* SIDEBAR BUTTONS */
     [data-testid="stSidebar"] .stButton > button {
         background: #1B2945 !important;
-        color: #F8FAFC !important;
+        color: #FFFFFF !important;
         border: 1px solid #344563 !important;
         border-radius: 10px !important;
-        min-height: 44px;
-        font-weight: 600;
+        min-height: 42px;
+        font-weight: 600 !important;
         box-shadow: none !important;
     }
 
-    [data-testid="stSidebar"] .stButton > button p {
-        color: #F8FAFC !important;
+    [data-testid="stSidebar"] .stButton > button p,
+    [data-testid="stSidebar"] .stButton > button span {
+        color: #FFFFFF !important;
     }
 
     [data-testid="stSidebar"] .stButton > button:hover {
         background: #293B5D !important;
-        color: #FFFFFF !important;
         border-color: #60A5FA !important;
     }
 
-    [data-testid="stSidebar"] .stButton > button[kind="primary"],
-    [data-testid="stSidebar"] .stButton > button[kind="primary"] p {
+    [data-testid="stSidebar"] .stButton > button[kind="primary"] {
         background: var(--blue) !important;
-        color: #FFFFFF !important;
         border-color: #60A5FA !important;
+        color: #FFFFFF !important;
     }
 
-    /* DASHBOARD METRIC CARDS */
-    [data-testid="stMetric"] {
-        background: var(--card-bg) !important;
-        border: 1px solid var(--border) !important;
-        border-radius: 15px !important;
-        padding: 20px !important;
-        box-shadow: 0 3px 12px rgba(23, 37, 84, 0.05);
-    }
+    /* ==========================================
+       NAVIGATION DROPDOWN — REMOVE BLACK BACKGROUND
+       ========================================== */
 
-    [data-testid="stMetricLabel"],
-    [data-testid="stMetricLabel"] p {
-        color: var(--text-muted) !important;
-    }
-
-    [data-testid="stMetricValue"],
-    [data-testid="stMetricValue"] div {
-        color: var(--navy) !important;
-        font-weight: 750 !important;
-    }
-
-    /* CARDS AND CONTAINERS */
-    [data-testid="stVerticalBlockBorderWrapper"] {
+    [data-testid="stMain"] [data-testid="stSelectbox"] > div,
+    [data-testid="stMain"] [data-testid="stSelectbox"] [data-baseweb="select"] > div {
         background: #FFFFFF !important;
-        border: 1px solid var(--border) !important;
-        border-radius: 14px !important;
-    }
-
-    /* FORMS */
-    [data-testid="stForm"] {
-        background: #FFFFFF !important;
-        border: 1px solid var(--border) !important;
-        border-radius: 14px !important;
-        padding: 22px !important;
-    }
-
-    /* INPUT FIELDS */
-    .stTextInput input,
-    .stTextArea textarea,
-    .stNumberInput input,
-    .stDateInput input {
-        background: #FFFFFF !important;
-        color: #1E293B !important;
-        border: 1px solid #CBD5E1 !important;
-        border-radius: 9px !important;
-        -webkit-text-fill-color: #1E293B !important;
-    }
-
-    .stTextInput input::placeholder,
-    .stTextArea textarea::placeholder {
-        color: #94A3B8 !important;
-        -webkit-text-fill-color: #94A3B8 !important;
-    }
-
-    /* DROPDOWNS */
-    [data-baseweb="select"] > div {
-        background: #FFFFFF !important;
+        color: var(--text-main) !important;
         border-color: #CBD5E1 !important;
         border-radius: 9px !important;
+        box-shadow: none !important;
     }
 
-    /* MAIN PAGE BUTTONS */
+    [data-testid="stMain"] [data-testid="stSelectbox"] input {
+        background: #FFFFFF !important;
+        color: var(--text-main) !important;
+        -webkit-text-fill-color: var(--text-main) !important;
+    }
+
+    [data-testid="stMain"] [data-testid="stSelectbox"] [data-testid="stMarkdownContainer"],
+    [data-testid="stMain"] [data-testid="stSelectbox"] span {
+        color: var(--text-main) !important;
+    }
+
+    /* Dropdown menu options */
+    [data-baseweb="popover"],
+    [data-baseweb="menu"] {
+        background: #FFFFFF !important;
+        color: var(--text-main) !important;
+    }
+
+    [role="option"] {
+        background: #FFFFFF !important;
+        color: var(--text-main) !important;
+    }
+
+    [role="option"]:hover {
+        background: #EFF6FF !important;
+        color: var(--navy) !important;
+    }
+
+    /* ==========================================
+       MAIN-PAGE BUTTONS — WHITE WITH BLUE TEXT
+       ========================================== */
+
     [data-testid="stMain"] .stButton > button,
-    [data-testid="stMain"] .stFormSubmitButton > button {
+    [data-testid="stMain"] .stFormSubmitButton > button,
+    [data-testid="stMain"] [data-testid="stDownloadButton"] > button {
         background: #FFFFFF !important;
         color: var(--blue) !important;
         border: 1px solid #B8CCF2 !important;
         border-radius: 9px !important;
         min-height: 40px;
-        font-weight: 600;
+        font-weight: 600 !important;
         box-shadow: none !important;
     }
 
     [data-testid="stMain"] .stButton > button p,
-    [data-testid="stMain"] .stFormSubmitButton > button p {
+    [data-testid="stMain"] .stFormSubmitButton > button p,
+    [data-testid="stMain"] [data-testid="stDownloadButton"] > button p {
         color: var(--blue) !important;
     }
 
     [data-testid="stMain"] .stButton > button:hover,
-    [data-testid="stMain"] .stFormSubmitButton > button:hover {
+    [data-testid="stMain"] .stFormSubmitButton > button:hover,
+    [data-testid="stMain"] [data-testid="stDownloadButton"] > button:hover {
         background: #EFF6FF !important;
         border-color: #60A5FA !important;
+        color: var(--navy) !important;
     }
 
+    /* Primary action buttons */
     [data-testid="stMain"] .stButton > button[kind="primary"],
     [data-testid="stMain"] .stFormSubmitButton > button[kind="primary"] {
         background: var(--blue) !important;
@@ -249,141 +242,112 @@ st.markdown(
         color: #FFFFFF !important;
     }
 
-    /* RADIO BUTTONS AND CHECKBOXES */
+    /* BUTTON ICONS */
+    [data-testid="stMain"] .stButton > button svg,
+    [data-testid="stMain"] .stFormSubmitButton > button svg {
+        color: var(--blue) !important;
+        fill: currentColor;
+    }
+
+    [data-testid="stMain"] .stButton > button[kind="primary"] svg {
+        color: #FFFFFF !important;
+    }
+
+    /* INPUT FIELDS */
+    [data-testid="stMain"] .stTextInput input,
+    [data-testid="stMain"] .stTextArea textarea,
+    [data-testid="stMain"] .stNumberInput input,
+    [data-testid="stMain"] .stDateInput input {
+        background: #FFFFFF !important;
+        color: var(--text-main) !important;
+        border: 1px solid #CBD5E1 !important;
+        border-radius: 9px !important;
+        -webkit-text-fill-color: var(--text-main) !important;
+    }
+
+    [data-testid="stMain"] input::placeholder,
+    [data-testid="stMain"] textarea::placeholder {
+        color: #94A3B8 !important;
+        -webkit-text-fill-color: #94A3B8 !important;
+    }
+
+    /* OTHER DROPDOWNS */
+    [data-testid="stMain"] [data-baseweb="select"] > div {
+        background: #FFFFFF !important;
+        border-color: #CBD5E1 !important;
+        border-radius: 9px !important;
+    }
+
+    /* CARDS AND CONTAINERS */
+    [data-testid="stMain"] [data-testid="stVerticalBlockBorderWrapper"] {
+        background: #FFFFFF !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 12px !important;
+    }
+
+    [data-testid="stMain"] [data-testid="stForm"] {
+        background: #FFFFFF !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 12px !important;
+        padding: 20px !important;
+    }
+
+    /* METRIC CARDS */
+    [data-testid="stMain"] [data-testid="stMetric"] {
+        background: #FFFFFF !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 12px !important;
+        padding: 12px !important;
+        box-shadow: 0 3px 12px rgba(23, 37, 84, 0.05);
+    }
+
+    [data-testid="stMain"] [data-testid="stMetricLabel"],
+    [data-testid="stMain"] [data-testid="stMetricLabel"] p {
+        color: #475569 !important;
+        font-size: 0.82rem !important;
+    }
+
+    [data-testid="stMain"] [data-testid="stMetricValue"],
+    [data-testid="stMain"] [data-testid="stMetricValue"] div {
+        color: var(--navy) !important;
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
+    }
+
+    /* CHECKBOXES AND RADIO BUTTONS */
     [data-testid="stMain"] [data-testid="stRadio"] label,
     [data-testid="stMain"] [data-testid="stCheckbox"] label {
         color: var(--text-main) !important;
     }
 
-    /* DIVIDERS AND LINKS */
-    [data-testid="stMain"] hr {
-        border-color: var(--border) !important;
+    /* TABLES */
+    [data-testid="stMain"] [data-testid="stDataFrame"],
+    [data-testid="stMain"] [data-testid="stTable"] {
+        background: #FFFFFF !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 10px !important;
     }
 
+    /* LINKS AND DIVIDERS */
     [data-testid="stMain"] a {
         color: var(--blue) !important;
     }
 
+    [data-testid="stMain"] hr {
+        border-color: var(--border) !important;
+        margin-top: 0.6rem !important;
+        margin-bottom: 0.6rem !important;
+    }
+
     /* ALERTS */
     [data-testid="stAlert"] {
-        border-radius: 10px;
+        border-radius: 10px !important;
     }
 
-    /* TABLES */
-    [data-testid="stMain"] [data-testid="stDataFrame"] {
-        border: 1px solid var(--border);
-        border-radius: 10px;
+    /* COMPACT LAYOUT */
+    [data-testid="stMain"] [data-testid="stVerticalBlock"] {
+        gap: 0.65rem;
     }
-    
-    
-/* ===== CampusOS: Compact dashboard and readable text ===== */
-
-/* Reduce overall spacing */
-[data-testid="stMain"] .block-container {
-    padding-top: 1.5rem !important;
-    padding-bottom: 1rem !important;
-    max-width: 1200px;
-}
-
-/* Smaller headings */
-[data-testid="stMain"] h1 {
-    font-size: 1.8rem !important;
-    margin-bottom: 0.35rem !important;
-}
-
-[data-testid="stMain"] h2 {
-    font-size: 1.35rem !important;
-    margin-top: 0.5rem !important;
-    margin-bottom: 0.4rem !important;
-}
-
-[data-testid="stMain"] h3 {
-    font-size: 1.05rem !important;
-    margin-bottom: 0.3rem !important;
-}
-
-/* Reduce gaps between Streamlit elements */
-[data-testid="stMain"] [data-testid="stVerticalBlock"] {
-    gap: 0.65rem;
-}
-
-/* Compact metric cards */
-[data-testid="stMain"] [data-testid="stMetric"] {
-    background: #FFFFFF !important;
-    border: 1px solid #DCE4F0 !important;
-    border-radius: 10px !important;
-    padding: 10px 12px !important;
-    gap: 3px !important;
-}
-
-[data-testid="stMain"] [data-testid="stMetricLabel"],
-[data-testid="stMain"] [data-testid="stMetricLabel"] p {
-    color: #475569 !important;
-    font-size: 0.82rem !important;
-}
-
-[data-testid="stMain"] [data-testid="stMetricValue"] {
-    color: #172554 !important;
-    font-size: 1.5rem !important;
-}
-
-/* Compact bordered profile and task cards */
-[data-testid="stMain"] [data-testid="stVerticalBlockBorderWrapper"] {
-    border: 1px solid #DCE4F0 !important;
-    border-radius: 10px !important;
-    padding: 0.65rem 0.8rem !important;
-    background-color: #FFFFFF !important;
-}
-
-/* Improve normal text contrast */
-[data-testid="stMain"] p,
-[data-testid="stMain"] label,
-[data-testid="stMain"] li,
-[data-testid="stMain"] [data-testid="stMarkdownContainer"] {
-    color: #1E293B;
-}
-
-/* Make captions readable */
-[data-testid="stMain"] [data-testid="stCaptionContainer"],
-[data-testid="stMain"] [data-testid="stCaptionContainer"] p {
-    color: #475569 !important;
-    font-size: 0.82rem !important;
-}
-
-/* Make white text visible on dark buttons and sidebar */
-[data-testid="stSidebar"] p,
-[data-testid="stSidebar"] label,
-[data-testid="stSidebar"] [data-testid="stMarkdownContainer"],
-[data-testid="stSidebar"] [data-testid="stCaptionContainer"] {
-    color: #FFFFFF !important;
-}
-
-[data-testid="stSidebar"] .stButton button[kind="primary"] p,
-[data-testid="stSidebar"] .stButton button[kind="primary"] span {
-    color: #FFFFFF !important;
-}
-
-/* Ensure primary buttons have strong contrast */
-[data-testid="stMain"] .stButton button[kind="primary"],
-[data-testid="stMain"] .stFormSubmitButton button[kind="primary"] {
-    background-color: #1D4ED8 !important;
-    border-color: #1D4ED8 !important;
-    color: #FFFFFF !important;
-}
-
-/* Keep button text visible */
-[data-testid="stMain"] .stButton button,
-[data-testid="stMain"] .stFormSubmitButton button {
-    font-weight: 600 !important;
-}
-
-/* Reduce divider spacing */
-[data-testid="stMain"] hr {
-    margin-top: 0.6rem !important;
-    margin-bottom: 0.6rem !important;
-}
-
-
     </style>
     """,
     unsafe_allow_html=True,
@@ -391,143 +355,12 @@ st.markdown(
 
 
 
-def initialize_database():
-    """Create CampusOS tables if they do not already exist."""
-    connection = sqlite3.connect(DATABASE, timeout=10)
-    connection.execute("PRAGMA foreign_keys = ON")
-
-    try:
-        connection.executescript("""
-            CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                email TEXT NOT NULL UNIQUE COLLATE NOCASE,
-                password_hash TEXT NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                registration_id TEXT,
-                bio TEXT,
-                department TEXT,
-                semester TEXT
-            );
-
-            CREATE TABLE IF NOT EXISTS tasks (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                title TEXT NOT NULL,
-                due_date TEXT,
-                completed INTEGER DEFAULT 0,
-                user_id INTEGER REFERENCES users(id),
-                priority TEXT DEFAULT 'Medium',
-                subject TEXT DEFAULT ''
-            );
-
-            CREATE TABLE IF NOT EXISTS pdfs (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                filename TEXT NOT NULL,
-                uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                title TEXT,
-                subject TEXT,
-                description TEXT,
-                stored_filename TEXT,
-                uploader_id INTEGER,
-                semester TEXT,
-                category TEXT NOT NULL DEFAULT 'Other'
-            );
-
-            CREATE TABLE IF NOT EXISTS discussions (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                title TEXT NOT NULL,
-                body TEXT NOT NULL,
-                author_id INTEGER NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                category TEXT NOT NULL DEFAULT 'General Questions',
-                FOREIGN KEY (author_id) REFERENCES users(id)
-            );
-
-            CREATE TABLE IF NOT EXISTS replies (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                discussion_id INTEGER NOT NULL,
-                body TEXT NOT NULL,
-                author_id INTEGER NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (discussion_id) REFERENCES discussions(id),
-                FOREIGN KEY (author_id) REFERENCES users(id)
-            );
-
-            CREATE TABLE IF NOT EXISTS study_groups (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                description TEXT,
-                subject TEXT,
-                creator_id INTEGER NOT NULL,
-                created_at TEXT DEFAULT CURRENT_TIMESTAMP
-            );
-
-            CREATE TABLE IF NOT EXISTS group_members (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                group_id INTEGER NOT NULL,
-                user_id INTEGER NOT NULL,
-                joined_at TEXT DEFAULT CURRENT_TIMESTAMP,
-                UNIQUE(group_id, user_id)
-            );
-
-            CREATE TABLE IF NOT EXISTS group_messages (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                group_id INTEGER NOT NULL,
-                user_id INTEGER NOT NULL,
-                message TEXT NOT NULL,
-                created_at TEXT DEFAULT CURRENT_TIMESTAMP
-            );
-
-            CREATE TABLE IF NOT EXISTS quiz_attempts (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user_id INTEGER NOT NULL,
-                pdf_id INTEGER NOT NULL,
-                score INTEGER NOT NULL DEFAULT 0,
-                total_questions INTEGER NOT NULL DEFAULT 0,
-                submitted INTEGER NOT NULL DEFAULT 0,
-                created_at TEXT DEFAULT CURRENT_TIMESTAMP
-            );
-
-            CREATE TABLE IF NOT EXISTS quiz_questions (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                attempt_id INTEGER NOT NULL,
-                question TEXT NOT NULL,
-                option_a TEXT NOT NULL,
-                option_b TEXT NOT NULL,
-                option_c TEXT NOT NULL,
-                option_d TEXT NOT NULL,
-                correct_answer TEXT NOT NULL,
-                explanation TEXT NOT NULL,
-                selected_answer TEXT,
-                FOREIGN KEY (attempt_id)
-                    REFERENCES quiz_attempts(id)
-            );
-        """)
-        connection.commit()
-    finally:
-        connection.close()
-
 
 def get_db():
     connection = sqlite3.connect(DATABASE, timeout=10)
     connection.row_factory = sqlite3.Row
     connection.execute("PRAGMA foreign_keys = ON")
     return connection
-
-def check_database_status():
-    connection = get_db()
-    try:
-        user_count = connection.execute(
-            "SELECT COUNT(*) FROM users"
-        ).fetchone()[0]
-
-        return user_count
-    finally:
-        connection.close()
-
-
-initialize_database()
-
 
 
 def table_columns(connection, table_name):
@@ -1151,58 +984,85 @@ pages = [
 if st.session_state.page not in pages:
     st.session_state.page = "Dashboard"
 
+# ============================================================
+# NAVIGATION CALLBACKS
+# ============================================================
 
-# Sidebar navigation
+def navigate_to(page_name):
+    st.session_state["page"] = page_name
+    st.session_state["main_page_navigation"] = page_name
+
+
+def navigate_from_main_menu():
+    st.session_state["page"] = (
+        st.session_state["main_page_navigation"]
+    )
+
+
+# ============================================================
+# SIDEBAR NAVIGATION
+# ============================================================
+
 with st.sidebar:
     st.title("🎓 CampusOS")
     st.caption("Your university, connected.")
-
     st.write(f"Signed in as **{user['name']}**")
     st.caption(f"Registration ID: {user['registration_id']}")
 
     st.divider()
 
     for page_name in pages:
-        if st.button(
+        st.button(
             page_name,
             key=f"nav_{page_name}",
             use_container_width=True,
             type=(
                 "primary"
-                if st.session_state.page == page_name
+                if st.session_state["page"] == page_name
                 else "secondary"
             ),
-        ):
-            st.session_state.page = page_name
-            st.rerun()
+            on_click=navigate_to,
+            args=(page_name,),
+        )
 
     st.divider()
 
-    if st.button("Log out", use_container_width=True):
-        st.session_state.user = None
-        st.session_state.page = "Dashboard"
+    if st.button(
+        "Log out",
+        key="sidebar_logout",
+        use_container_width=True,
+    ):
+        st.session_state["user"] = None
+        st.session_state["page"] = "Dashboard"
+        st.session_state.pop("main_page_navigation", None)
         st.rerun()
 
     st.caption("CampusOS • Student Learning Platform")
 
 
+# ============================================================
+# BACKUP NAVIGATION
+# ============================================================
 
-# Main-page navigation backup
-selected_page = st.selectbox(
-    "🧭 Navigate to a page",
+if "main_page_navigation" not in st.session_state:
+    st.session_state["main_page_navigation"] = (
+        st.session_state["page"]
+    )
+
+st.selectbox(
+    "🧭 Navigate to a page (backup)",
     pages,
     index=pages.index(st.session_state["page"]),
     key="main_page_navigation",
+    on_change=navigate_from_main_menu,
 )
 
-if selected_page != st.session_state["page"]:
-    st.session_state["page"] = selected_page
-    st.rerun()
 
-# Dashboard and feature pages
+# ============================================================
+# DASHBOARD AND FEATURE PAGES
+# ============================================================
+
 page = st.session_state["page"]
-
-
 
 
 if page == "Dashboard":
