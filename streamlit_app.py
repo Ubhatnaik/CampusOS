@@ -391,12 +391,132 @@ st.markdown(
 
 
 
+def initialize_database():
+    """Create CampusOS tables if they do not already exist."""
+    connection = sqlite3.connect(DATABASE, timeout=10)
+    connection.execute("PRAGMA foreign_keys = ON")
+
+    try:
+        connection.executescript("""
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                email TEXT NOT NULL UNIQUE COLLATE NOCASE,
+                password_hash TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                registration_id TEXT,
+                bio TEXT,
+                department TEXT,
+                semester TEXT
+            );
+
+            CREATE TABLE IF NOT EXISTS tasks (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT NOT NULL,
+                due_date TEXT,
+                completed INTEGER DEFAULT 0,
+                user_id INTEGER REFERENCES users(id),
+                priority TEXT DEFAULT 'Medium',
+                subject TEXT DEFAULT ''
+            );
+
+            CREATE TABLE IF NOT EXISTS pdfs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                filename TEXT NOT NULL,
+                uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                title TEXT,
+                subject TEXT,
+                description TEXT,
+                stored_filename TEXT,
+                uploader_id INTEGER,
+                semester TEXT,
+                category TEXT NOT NULL DEFAULT 'Other'
+            );
+
+            CREATE TABLE IF NOT EXISTS discussions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT NOT NULL,
+                body TEXT NOT NULL,
+                author_id INTEGER NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                category TEXT NOT NULL DEFAULT 'General Questions',
+                FOREIGN KEY (author_id) REFERENCES users(id)
+            );
+
+            CREATE TABLE IF NOT EXISTS replies (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                discussion_id INTEGER NOT NULL,
+                body TEXT NOT NULL,
+                author_id INTEGER NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (discussion_id) REFERENCES discussions(id),
+                FOREIGN KEY (author_id) REFERENCES users(id)
+            );
+
+            CREATE TABLE IF NOT EXISTS study_groups (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                description TEXT,
+                subject TEXT,
+                creator_id INTEGER NOT NULL,
+                created_at TEXT DEFAULT CURRENT_TIMESTAMP
+            );
+
+            CREATE TABLE IF NOT EXISTS group_members (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                group_id INTEGER NOT NULL,
+                user_id INTEGER NOT NULL,
+                joined_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(group_id, user_id)
+            );
+
+            CREATE TABLE IF NOT EXISTS group_messages (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                group_id INTEGER NOT NULL,
+                user_id INTEGER NOT NULL,
+                message TEXT NOT NULL,
+                created_at TEXT DEFAULT CURRENT_TIMESTAMP
+            );
+
+            CREATE TABLE IF NOT EXISTS quiz_attempts (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                pdf_id INTEGER NOT NULL,
+                score INTEGER NOT NULL DEFAULT 0,
+                total_questions INTEGER NOT NULL DEFAULT 0,
+                submitted INTEGER NOT NULL DEFAULT 0,
+                created_at TEXT DEFAULT CURRENT_TIMESTAMP
+            );
+
+            CREATE TABLE IF NOT EXISTS quiz_questions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                attempt_id INTEGER NOT NULL,
+                question TEXT NOT NULL,
+                option_a TEXT NOT NULL,
+                option_b TEXT NOT NULL,
+                option_c TEXT NOT NULL,
+                option_d TEXT NOT NULL,
+                correct_answer TEXT NOT NULL,
+                explanation TEXT NOT NULL,
+                selected_answer TEXT,
+                FOREIGN KEY (attempt_id)
+                    REFERENCES quiz_attempts(id)
+            );
+        """)
+        connection.commit()
+    finally:
+        connection.close()
+
 
 def get_db():
     connection = sqlite3.connect(DATABASE, timeout=10)
     connection.row_factory = sqlite3.Row
     connection.execute("PRAGMA foreign_keys = ON")
     return connection
+
+
+initialize_database()
+
 
 
 def table_columns(connection, table_name):
